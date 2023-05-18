@@ -1,9 +1,21 @@
 <div>
 
+    <div class='row mt-3'>
+        <form wire:submit.prevent='search'>
+        <div class="col">
+            <input class="rounded form-control w-50 float-start" type='text' wire:model.lazy='input_value' placeholder="Szukaj..." >
+        </div>
+        <div class="col">
+            <button type='submit' class='btn btn-success float-start w-auto ms-1'>Szukaj</button>
+        </div>
+        </form>
+    </div>
+
 <div class='container mt-5'>
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <thead>
           <tr>
+            <th>#</th>
             <th>Nazwa</th>
             <th>Adres</th>
             <th>Strona internetowa</th>
@@ -25,13 +37,19 @@
                     <td>{{$contact->email}}</td>
                     <td>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_{{$contact->id}}" data-bs-toggle="dropdown" aria-expanded="false">
-                              Opcje
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton_{{$contact->id}}" data-bs-toggle="dropdown" aria-expanded="false">
+                                ...
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1_{{$contact->id}}">
                               <li>
-                                <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$contact->id}}">
-                                    Usun
+                                <button type="button" class="dropdown-item text-success" wire:click="edit_contact({{$contact->id}})">
+                                    Edytuj
+                                </button>
+
+                                <li><hr class="dropdown-divider"></li>
+
+                                <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$contact->id}}">
+                                    Usuń
                                 </button>
                                 </li>
                             </ul>
@@ -44,15 +62,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel_{{$contact->id}}">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel_{{$contact->id}}">Czy na pewno chcesz usunąć kontakt?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
+        {{--
         <div class="modal-body">
           Czy chcesz usunac kontakt o ID = {{ $contact->id}}?
         </div>
+        --}}
+
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Nie</button>
+          <button type="button" class="btn btn-danger" wire:click='destroy_contact({{$contact->id}})'>Tak</button>
         </div>
       </div>
     </div>
@@ -60,39 +82,11 @@
           @endforeach
         </tbody>
       </table>
-{{-- <table class="table table-striped table-bordered">
-    <tr>
-        <th></th>
-        <th>Nazwa</th>
-        <th>Adres</th>
-        <th>Strona internetowa</th>
-        <th>Numer telefonu</th>
-        <th>Adres e-mail</th>
-    </tr>
-    @foreach ($all_contacts as $contact)
-        <tr>
-            <td>
-                <div class="dropdown_{{$contact->id}}">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown_{{ $contact->id}}">
-                      ...
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><button class='btn btn-default text-danger' data-bs-toggle="modal" data-bs-target="#destroyModal_{{$contact->id}}">usuń</button></li>
-                    </ul>
+
+      <br>
 
 
 
-            </td>
-            <td>{{$contact->name}}</td>
-            <td>{{$contact->address}}</td>
-            <td>{{$contact->website}}</td>
-            <td>{{$contact->phone}}</td>
-            <td>{{$contact->email}}</td>
-            
-        </tr>
-
-    @endforeach
-</table> --}}
 <button class='btn btn-primary btn-large float-end' wire:click='create_contact'>Dodaj kontakt</button>
 </div>
 
@@ -101,23 +95,4 @@
 
 
 </div>
-
- {{--MODALS--}}
- {{-- <div class="modal fade" id="destroyModal_{{$contact->id}}">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            
-            <div class="modal-header">
-                <h4 class="modal-title">Czy na pewno chcesz usunąć ten kontakt? O ID = {{ $contact->id }}</h4>
-            </div>
-                    
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger float-start" data-bs-dismiss="modal" wire:click="destroy_contact({{$current_id}})">Tak</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Nie</button>
-            </div>
-                    
-        </div>
-    </div>
-</div> --}}
-{{--MODAL--}}
        
