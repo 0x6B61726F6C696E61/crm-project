@@ -14,4 +14,12 @@ class Index extends Component
         $this->all_contacts = Contact::all();
         return view('livewire.index');
     }
+
+    public function create_contact(){
+        return redirect('/dodaj-kontakt');
+    }
+
+    public function destroy_contact(){
+        return redirect('/dodaj-kontakt');
+    }
 }

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Index;
+use App\Http\Livewire\Create;
+use App\Http\Livewire\Update;
+use App\Http\Livewire\Destroy;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +18,4 @@ use App\Http\Livewire\Index;
 */
 
 Route::get('/', Index::class);
+Route::get('/dodaj-kontakt', Create::class);
