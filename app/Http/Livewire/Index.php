@@ -8,6 +8,7 @@ use App\Models\Contact;
 class Index extends Component
 {
     public $all_contacts;
+    public $current_id;
 
     public function render()
     {
@@ -19,7 +20,11 @@ class Index extends Component
         return redirect('/dodaj-kontakt');
     }
 
-    public function destroy_contact(){
-        return redirect('/dodaj-kontakt');
+    public function destroy_contact($contact_id){
+        return redirect('/dodaj-przedmiot');
+    }
+
+    public function get_id ($contact_id){
+        $this->current_id = $contact_id;
     }
 }
