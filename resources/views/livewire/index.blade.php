@@ -1,17 +1,19 @@
 <div>
 
-    <div class='row mt-3'>
+  <div class='container ms-5'>
+
+    <div class='row mt-4'>
         <form wire:submit.prevent='search'>
         <div class="col">
             <input class="rounded form-control w-50 float-start" type='text' wire:model.lazy='input_value' placeholder="Szukaj..." >
         </div>
         <div class="col">
-            <button type='submit' class='btn btn-success float-start w-auto ms-1'>Szukaj</button>
+            <button type='submit' class='btn btn-primary float-start w-auto ms-1'>Szukaj</button>
         </div>
         </form>
     </div>
 
-<div class='container mt-5'>
+<div class='container mt-4'>
     <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -83,11 +85,23 @@
         </tbody>
       </table>
 
+    </div>
+
       <br>
 
 
+    <div class='row'>
+      <div class='col'>
+        {{ $all_contacts->links() }}
+      </div>
+      <div class='col'>
+        <button class='btn btn-primary btn-large float-end' wire:click='create_contact'>Dodaj kontakt</button>
+      </div>    
+    </div>
 
-<button class='btn btn-primary btn-large float-end' wire:click='create_contact'>Dodaj kontakt</button>
+
+
+
 </div>
 
 
